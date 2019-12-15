@@ -1,0 +1,317 @@
+@mixin reset {
+  margin: 0;
+  padding: 0;
+}
+
+@mixin pageSize {
+  margin: 0 auto;
+  width: 80%;
+}
+
+@mixin button($width, $height) {
+  color: $supplementaryColor;
+  background-color: $buttonBgColor;
+  font-weight: bold;
+  font-size: 17px;
+  border: none;
+  border-radius: 3px;
+  text-align: center;
+  width: $width;
+  height: $height;
+}
+
+@mixin link($color, $fontSize, $fontFamily) {
+  color: $color;
+  font-size: $fontSize;
+  font-family: $fontFamily;
+}
+
+@mixin logoTitle {
+  display: flex;
+  flex-direction: column;
+  margin: $BgLogoTop 0 0 $BgLogoLeft;
+  font-family: $logoFont;
+  color: $primaryTextColor;
+  font: bold 24px $primaryFont;
+}
+
+@mixin logoDescription {
+  margin-top: $SmLogoTop;
+  margin-left: $SmLogoLeft;
+  font-size: 10px;
+}
+
+@mixin banner($width, $height) {
+  background: $gradColor;
+  bottom: $banerBottomposition;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 160px;
+  width: $width;
+  height: $height;
+}
+
+%borderRadius {
+  border-radius: 9px;
+}
+
+@mixin outline($height, $width) {
+  content: "";
+  position: absolute;
+  background-color: $outlineColor;
+  z-index: -1;
+  height: $height;
+  width: $width;
+}
+
+button {
+  @include button(142px, 47px);
+}
+
+a {
+  @include link($supplementaryColor, 20px, $linkFont);
+}
+
+body {
+  @include reset;
+  background: $bgColor;
+  width: 1920px;
+
+  .header {
+    background: $bgColor $imageBackground center center no-repeat;
+    background-size: cover;
+    border-radius: 0% 0% 40% 50%/100% 60% 40% 0%;
+    height: 720px;
+
+    .header-wrap {
+      @include pageSize;
+      padding-top: 20px;
+
+      .landing-logo {
+        display: flex;
+
+        img {
+          height: 45px;
+          width: 45px;
+        }
+
+        p {
+          @include logoTitle;
+
+          span {
+            @include logoDescription;
+          }
+        }
+      }
+
+      .header_heading {
+        font: bold 70px/101% map-get($fonts, "Source"), sans-serif;
+        color: $primaryTextColor;
+        letter-spacing: 1px;
+        width: 500px;
+        margin-top: 74px;
+        position: relative;
+        z-index: 1;
+
+        &::after {
+          @include outline(50px, 302px);
+          left: 0px;
+          bottom: 0px;
+        }
+      }
+
+      .header_text {
+        margin: 0px;
+        font: lighter 17px/100% $secondaryFont;
+        white-space: pre-line;
+        color: $primaryTextColor;
+        margin-top: -29px;
+        line-height: 23px;
+        font-weight: lighter;
+      }
+
+      .login {
+        margin-left: 150px;
+      }
+
+      .header_button {
+        margin-top: 64px;
+      }
+    }
+  }
+
+  .section {
+    margin: 0 auto;
+    width: 58%;
+    position: relative;
+
+    .section_text {
+      text-align: center;
+      color: $primaryTextColor;
+      font-size: 42px;
+      font-family: map-get($fonts, "Source"), sans-serif;
+      position: relative;
+      letter-spacing: 0.5px;
+      margin: 37px 0px;
+
+      &::after {
+        @include outline(50px, 190px);
+        right: 360px;
+        bottom: 8px;
+      }
+    }
+
+    .section_card_wrap {
+      .section_card {
+        @extend %borderRadius;
+        background-color: $sectionColor;
+        margin-bottom: 25px;
+        padding: $cardPadding;
+        display: flex;
+
+        .section_card_img {
+          @extend %borderRadius;
+          flex-shrink: 0;
+        }
+
+        &:nth-child(1) {
+          .section_card_img {
+            width: $firstPictureWidth;
+          }
+          .section_card_right_container {
+            margin: 24px 88px;
+          }
+        }
+
+        &:nth-child(2) {
+          .section_card_img {
+            width: $secondPictureWidth;
+          }
+
+          .section_card_right_container {
+            margin: 20px 88px;
+          }
+        }
+
+        &:nth-child(3) {
+          .section_card_img {
+            width: $thirdPictureWidth;
+          }
+          .section_card_right_container {
+            margin: 35px 84px;
+          }
+        }
+
+        .section_card_right_container {
+          display: flex;
+          flex-direction: column;
+          vertical-align: top;
+          justify-content: space-around;
+
+          .section_card_heading {
+            font: bold $cardHeaderFontSize $logoFont;
+            color: white;
+            text-align: center;
+            font-family: $cardHeaderFont;
+          }
+
+          .section_card_text {
+            font: 16px $primaryFont;
+            color: $secondaryTextColor;
+            word-spacing: 4px;
+            line-height: 1.5;
+          }
+
+          .section_link {
+            @include link($secondaryTextColor, 16px, $logoFont);
+            display: block;
+            text-align: center;
+          }
+        }
+      }
+    }
+
+    .section_banner {
+      @extend %borderRadius;
+      @include banner(876px, 143px);
+      left: -41px;
+      position: absolute;
+      margin: 0 auto;
+
+      .section_banner_heading {
+        font-family: $bannerHeadFont;
+        font-size: 30px;
+        font-weight: bold;
+        color: $primaryTextColor;
+        margin-bottom: 10px;
+        margin-top: 25px;
+        position: relative;
+        z-index: 1;
+
+        &::after {
+          @include outline(50px, 65px);
+          left: $bannerPseudoLeft;
+          bottom: $bannerPseudoBottom;
+          z-index: -1;
+        }
+      }
+
+      .section_banner_text {
+        margin-top: 10px;
+        font-family: $bannerFont;
+        font-size: 16px;
+        color: $secondaryTextColor;
+      }
+
+      .section_banner_button {
+        align-self: center;
+      }
+    }
+  }
+
+  .footer {
+    height: 240px;
+    background-color: $sectionColor;
+    margin-top: 208px;
+    font-family: $primaryFont;
+
+    .footer-wrap {
+      @include pageSize;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 100%;
+
+      .landing-logo {
+        display: flex;
+
+        img {
+          height: 45px;
+          width: 45px;
+        }
+
+        p {
+          @include logoTitle;
+          color: $secondaryTextColor;
+
+          span {
+            @include logoDescription;
+          }
+        }
+      }
+
+      .footer_text {
+        width: 311px;
+        font-size: 14px;
+        font-family: $logoFont;
+        color: $secondaryTextColor;
+      }
+
+      .footer-cr {
+        font-size: 16px;
+        font-family: $logoFont;
+        color: $secondaryTextColor;
+      }
+    }
+  }
+}
