@@ -11,3 +11,4 @@ function makeNumber(str) {
 }
 
 makeNumber('dhjsv12hvszdha432');
+// makeNumber('123dhjsv12hvszdha432');

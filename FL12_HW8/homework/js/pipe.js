@@ -11,6 +11,6 @@ function pipe (num, ...args) {
 
 
 pipe(1, addOne);
-pipe(1, addOne, addOne);
+// pipe(1, addOne, addOne);
 
 

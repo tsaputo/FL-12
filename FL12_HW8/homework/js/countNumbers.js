@@ -18,12 +18,12 @@ function countNumbers(str) {
         return obj;
     } else {
         result = makeNumber(str);
-        obj[result.charAt(0)] = 1;
+        obj['\'' + result.charAt(0) + '\''] = 1;
         for (i = 1; i < result.length; i++) {
-            if (obj[result.charAt(i)]) {
-                obj[result.charAt(i)]++;
+            if (obj['\'' + result.charAt(i)+ '\'' ]) {
+                obj['\'' + result.charAt(i) + '\'' ]++;
             } else {
-                obj[result.charAt(i)] = 1;
+                obj['\'' + result.charAt(i) + '\'' ] = 1;
             }
         }
         return obj;
@@ -31,4 +31,4 @@ function countNumbers(str) {
 }
 
 countNumbers("gggvjc5555661");
-countNumbers();
+// countNumbers();
