@@ -1,10 +1,10 @@
 function makeNumber(str) {
-    let arr= str.split('');
     let newArr = [];
     let i;
-    for (i = 0; i < arr.length; i++) {
-        if(!isNaN(arr[i])) {
-            newArr.push(arr[i]);
+    for (i = 0; i < str.length; i++) {
+		let num = parseInt(str.charAt(i));
+        if(!isNaN(num)) {
+            newArr.push(num);
         }
     }
     return newArr.join('');
