@@ -1,17 +1,7 @@
-function isLeapYear (){
-    let ourDate = new Date(arguments[0]);
-    let year = ourDate.getFullYear();
-    if(isNaN(year)) {
-        return(`Invalid Date`)
-    } else if (year%4 === 0) {
-        if (year%100 === 0 && year%400 === 0) {
-            return(`${year} is a leap year`)
-        } else if(year%100 !== 0) {
-            return(`${year} is a leap year`)
-        }
-    } else {
-        return (`${year} is not a leap year`)
-    }
+function isLeapYear(text) {
+  const year = new Date(text).getFullYear();
+  return isNaN(year)?
+  'Invalid Date' : `"${year}" is${year%400 ===0||year%4=== 0 && year % 100 !== 0?'':' not'} a leap year`
 }
 
 isLeapYear(1213131313);
