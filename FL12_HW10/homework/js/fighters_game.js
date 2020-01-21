@@ -1,4 +1,4 @@
-class Fighter { 
+class Fighter {
 
     constructor(properties) {
         const REQUIRED_FIELDS = ['name', 'damage', 'hp', 'strength', 'agility'];
@@ -13,47 +13,46 @@ class Fighter {
         let _loses = 0;
         const PRIMARY_HP = _properties.hp;
 
-        this.getName = function() { 
-            return _properties.name; 
+        this.getName = function () {
+            return _properties.name;
         }
-        this.getDamage = function() { 
-            return _properties.damage; 
+        this.getDamage = function () {
+            return _properties.damage;
         }
-        this.getHealth = function() {
-            return _properties.hp; 
+        this.getHealth = function () {
+            return _properties.hp;
         }
-        this.getStrength = function() { 
-            return _properties.strength; 
+        this.getStrength = function () {
+            return _properties.strength;
         }
-        this.getAgility = function() { 
-            return _properties.agility; 
+        this.getAgility = function () {
+            return _properties.agility;
         }
-        this.addWin = function() { 
-            return _wins++; 
+        this.addWin = function () {
+            return _wins++;
         }
-        this.addLoss = function() { 
-            return _loses++; 
-        }   
+        this.addLoss = function () {
+            return _loses++;
+        }
 
-        this.dealDamage = function(reduceAmount) {
+        this.dealDamage = function (reduceAmount) {
             _properties.hp = _properties.hp - reduceAmount;
             if (_properties.hp < 0) {
                 _properties.hp = 0;
             }
         }
 
-        this.heal = function(hp) {
-            if((_properties.hp += hp) > PRIMARY_HP) {
+        this.heal = function (hp) {
+            if ((_properties.hp += hp) > PRIMARY_HP) {
                 _properties.hp = PRIMARY_HP;
             } else {
                 _properties.hp += hp;
             }
         }
 
-        this.logCombatHistory = function() {
+        this.logCombatHistory = function () {
             return `Name: ${this.getName()}, Wins: ${_wins}, Losses: ${_loses}`;
-        }       
-        
+        }
     }
 
     attack(otherFighter) {
@@ -61,7 +60,7 @@ class Fighter {
         let attackFailProbability = otherFighter.getStrength() + otherFighter.getAgility();
         if (Math.floor(Math.random() * (maxPercents + 1)) >= attackFailProbability) {
             otherFighter.dealDamage(this.getDamage());
-            console.log(`${this.getName()} makes ${this.getDamage()} damage to ${otherFighter.getName()}`);            
+            console.log(`${this.getName()} makes ${this.getDamage()} damage to ${otherFighter.getName()}`);
         } else {
             console.log(`${this.getName()} attack missed`);
         }
@@ -74,12 +73,12 @@ function battle(firstFighter, secondFighter) {
         return `${firstFighter.getName()} is dead and cannot fight!`;
     } else if (secondFighter.getHealth() === 0) {
         return `${secondFighter.getName()} is dead and cannot fight!`;
-    } else {    
-        while (firstFighter.getHealth() > 0 && secondFighter.getHealth() > 0) {  
+    } else {
+        while (firstFighter.getHealth() > 0 && secondFighter.getHealth() > 0) {
             firstFighter.attack(secondFighter);
             if (secondFighter.getHealth() > 0) {
-            secondFighter.attack(firstFighter);
-            }       
+                secondFighter.attack(firstFighter);
+            }
         }
 
         if (firstFighter.getHealth() === 0 && secondFighter.getHealth() > 0) {
@@ -90,7 +89,7 @@ function battle(firstFighter, secondFighter) {
             secondFighter.addLoss();
             firstFighter.addWin();
             return `${firstFighter.getName()} has won!`;
-        } 
+        }
     }
 }
 
