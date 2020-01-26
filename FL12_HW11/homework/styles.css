@@ -1,0 +1,45 @@
+/* Todo: your styles go here*/
+
+.material-icons.folder{
+    color: gold;
+}
+
+.material-icons.file {
+    color: grey;
+}
+
+li {
+    list-style-type: none;
+}
+
+li i {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+span {
+    display: block;
+    position: relative;
+    padding: 5px 0 5px 30px;
+}
+
+span:hover {
+
+    background-color: lightgrey;
+    cursor: pointer;
+}  
+
+div>ul {
+    padding-left: 0px;
+}
+
+div>ul * ul {
+    display: none;
+    padding-left: 30px;
+}
+
+.emptyFolder {
+    font-style: italic;
+    padding-left: 0px;
+}
