@@ -1,0 +1,26 @@
+/* Your styles go here */
+
+h1 {
+    display: inline-block;
+}
+
+.addButton {
+    float: right;
+    margin: 20px 50px;
+}
+
+
+.setsContainer {
+    border: 1px solid grey;
+    width: 400px;
+    margin: 0 auto;
+}
+
+.setsContainer > div {
+    border: 1px solid grey;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    flex-direction: column;
+}

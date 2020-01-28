@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Homework 12 - Simple TODO List</title>
+  <link rel="stylesheet" href="./assets/styles.css">
+</head>
+<body>
+  <button onclick="showMainPage()">Main</button> 
+  <button onclick="showEditPage()">Edit</button>
+
+  <div id="root">
+    <div id="main">
+      <h1>Main</h1>
+      <button class="addButton" onclick="showCreatePage()">Add new set</button>
+    </div>
+    <div id="create"><h1>Add new set</h1></div>
+    <div id="edit"><h1>Modify</h1></div>
+  </div>
+
+  <script src="./src/app.js"></script>
+</body>
+</html>
