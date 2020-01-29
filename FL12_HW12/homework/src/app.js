@@ -24,7 +24,6 @@ function showEditPage() {
     }
     location.hash = 'edit';
 }
-
 window.onload = function () {
     renderPages();
     renderCreatePage(createPage);
@@ -103,8 +102,8 @@ function renderCreatePage(el) {
     setContainer.appendChild(addTermButton).innerHTML = 'Add term';
     setContainer.appendChild(saveSetButton).innerHTML = 'Save terms';
     setContainer.appendChild(cancelButton).innerHTML = 'Cancel';
-
-    saveSetButton.addEventListener('click', saveToLocalStorage);
+    
+    saveSetButton.addEventListener('click', saveToLocalStorage.bind(this, setContainer), false);
 
     addTermButton.addEventListener('click', renderTermInput.bind(this, setContainer), false);
 
@@ -168,34 +167,8 @@ function renderEditPage(el, key) {
             termContainer.remove();
         });
     }
-
-    saveSetButton.addEventListener('click', saveToStorage);
-
-    function saveToStorage() {
-        this.key = key;
-        let value = {};
-        value.name = document.getElementById('newNameInput').value;
-        value.terms = [];
-
-        let termInputs = document.getElementsByClassName('termEditInput');
-
-        for (let i = 0; i < termInputs.length; i++) {
-            let termDef = {};
-            termDef.term = termInputs[i].value;
-            termDef.definition = document.getElementsByClassName('definitionEditInput')[i].value;
-            value.terms.push(termDef);
-        }
-
-        let stringValue = JSON.stringify(value);
-
-        if (value.name) {
-            localStorage.setItem(key, stringValue);
-        } else {
-            alert('Please, fill the name!');
-        }
-
-        location.hash = '#main';
-    }
+    saveSetButton.addEventListener('click', saveToLocalStorage.bind(this, setEditContainer, key), false);
+    
     addTermButton.addEventListener('click', renderTermInput.bind(this, setEditContainer), false);
 
     cancelButton.addEventListener('click', function () {
@@ -203,25 +176,31 @@ function renderEditPage(el, key) {
     });
 }
 
-
-function saveToLocalStorage() {
-
-
-
+function saveToLocalStorage(el, key) {
+    let inputs = el.querySelectorAll('input');
     let value = {};
-    value.name = document.getElementById('nameInput').value;
+    value.name = inputs[0].value;
     value.terms = [];
 
 
-    for (let i = 0; i < document.getElementsByClassName('termInput').length; i++) {
+    for (let i = 1; i < inputs.length; i++) {
         let termDef = {};
-        termDef.term = document.getElementsByClassName('termInput')[i].value;
-        termDef.definition = document.getElementsByClassName('definitionInput')[i].value;
+            if(!i%2 === 0) {
+                termDef.term = inputs[i].value;
+                termDef.definition = inputs[++i].value;
+            }              
         value.terms.push(termDef);
     }
 
     let stringValue = JSON.stringify(value);
-
+    if (localStorage.getItem(key) !== null) {
+        if (value.name) {
+            localStorage.setItem(key, stringValue);
+        } else {
+            alert('Please, fill the name!');
+        }
+    } else {
+    
     let id = Number(localStorage.getItem('lastId')) + 1;
     localStorage.setItem('lastId', id);
 
@@ -231,5 +210,11 @@ function saveToLocalStorage() {
         alert('Please, fill the name!');
     }
 
+}
+
     location.hash = '#main';
 }
+
+
+
+
