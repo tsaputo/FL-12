@@ -112,11 +112,9 @@ function renderModifyPage(el) {
         location.hash = '#main';
     });
 
-
 }
 
 function renderTermInput() {
-    const setContainer = document.createElement('div');
     const termContainer = document.createElement('div');
     termContainer.className = 'termContainer';
     const termInput = document.createElement('input');
