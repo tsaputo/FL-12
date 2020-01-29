@@ -1,5 +1,5 @@
 const root = document.getElementById('root');
-const modifyPage = document.getElementById('create');
+const createPage = document.getElementById('create');
 const editPage = document.getElementById('edit');
 const ZERO = 0;
 
@@ -27,7 +27,7 @@ function showEditPage() {
 
 window.onload = function () {
     renderPages();
-    renderModifyPage(modifyPage);
+    renderCreatePage(createPage);
     // renderEditPage(editPage);
 };
 
@@ -89,7 +89,7 @@ function renderMainPage() {
     }
 }
 
-function renderModifyPage(el) {
+function renderCreatePage(el) {
     const setContainer = document.createElement('div');
     setContainer.id = 'setContainer';
     const nameInput = document.createElement('input');
@@ -152,16 +152,13 @@ function renderEditPage(el, key) {
     setEditContainer.appendChild(cancelButton).innerHTML = 'Cancel';
 
 
-
-    addTermButton.addEventListener('click', renderTermInput);
-
     for (let i = 0; i < valueObj.terms.length; i++) {
         const termContainer = document.createElement('div');
         termContainer.className = 'termContainer';
         const termInput = document.createElement('input');
         termInput.className = 'termEditInput';
         const definitionInput = document.createElement('input');
-        definitionInput.className = 'definitionInput';
+        definitionInput.className = 'definitionEditInput';
         const removeThisTermButton = document.createElement('button');
         setEditContainer.appendChild(termContainer);
         termContainer.appendChild(termInput).defaultValue = valueObj.terms[i].term;
@@ -185,7 +182,7 @@ function renderEditPage(el, key) {
         for (let i = 0; i < termInputs.length; i++) {
             let termDef = {};
             termDef.term = termInputs[i].value;
-            termDef.definition = document.getElementsByClassName('definitionInput')[i].value;
+            termDef.definition = document.getElementsByClassName('definitionEditInput')[i].value;
             value.terms.push(termDef);
         }
 
@@ -208,6 +205,8 @@ function renderEditPage(el, key) {
 
 
 function saveToLocalStorage() {
+
+
 
     let value = {};
     value.name = document.getElementById('nameInput').value;
@@ -234,15 +233,3 @@ function saveToLocalStorage() {
 
     location.hash = '#main';
 }
-
-
-
-
-
-
-
-
-
-
-
-
