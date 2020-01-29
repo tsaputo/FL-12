@@ -106,7 +106,7 @@ function renderModifyPage(el) {
 
     saveSetButton.addEventListener('click', saveToLocalStorage);
 
-    addTermButton.addEventListener('click', renderTermInput);
+    addTermButton.addEventListener('click', renderTermInput.bind(this, setContainer), false);
 
     cancelButton.addEventListener('click', function () {
         location.hash = '#main';
@@ -114,7 +114,7 @@ function renderModifyPage(el) {
 
 }
 
-function renderTermInput() {
+function renderTermInput(el) {
     const termContainer = document.createElement('div');
     termContainer.className = 'termContainer';
     const termInput = document.createElement('input');
@@ -122,7 +122,7 @@ function renderTermInput() {
     const definitionInput = document.createElement('input');
     definitionInput.className = 'definitionInput';
     const removeTermButton = document.createElement('button');
-    setContainer.appendChild(termContainer);
+    el.appendChild(termContainer);
     termContainer.appendChild(termInput).defaultValue = 'Term';
     termContainer.appendChild(definitionInput).defaultValue = 'Definition';
     termContainer.appendChild(removeTermButton).innerHTML = 'remove';
@@ -199,7 +199,7 @@ function renderEditPage(el, key) {
 
         location.hash = '#main';
     }
-    // addTermButton.addEventListener('click', renderTermInput);
+    addTermButton.addEventListener('click', renderTermInput.bind(this, setEditContainer), false);
 
     cancelButton.addEventListener('click', function () {
         location.hash = '#main';
