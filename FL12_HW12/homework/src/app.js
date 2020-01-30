@@ -49,12 +49,7 @@ function renderPages() {
 
 
 function renderMainPage() {
-    for (let i = 0; i < localStorage.length; i++) {
-        let key = localStorage.key(i);
-        if (key === "lastId" && localStorage.length === 1) {
-            localStorage.clear();
-        }
-    }
+
 
     let element = document.getElementsByClassName('setsContainer')[ZERO];
     if (element) {
@@ -66,11 +61,9 @@ function renderMainPage() {
 
     document.getElementById('main').appendChild(setsContainer);
 
-    for (let i = 0; i < localStorage.length; i++) {
-        let key = localStorage.key(i);
-        if (!key.startsWith('set_')) {
-            continue;
-        }
+    let set = localStorageDataSort(localStorage);
+    for (let i = 0; i < set.length; i++) {
+        let key = `set_${set[i].id}`;
 
         const oneSetContainer = document.createElement('div');
         const editButton = document.createElement('button');
@@ -85,8 +78,8 @@ function renderMainPage() {
             localStorage.removeItem(key);
             renderMainPage();
         });
-        let valueObj = JSON.parse(localStorage.getItem(key));
-        oneSetContainer.innerHTML = valueObj.name;
+        // let valueObj = JSON.parse(set[i]);
+        oneSetContainer.innerHTML = set[i].name;
         oneSetContainer.appendChild(editButton);
         oneSetContainer.appendChild(removeButton);
         setsContainer.appendChild(oneSetContainer);
@@ -218,6 +211,31 @@ function saveToLocalStorage(el, key) {
 
 }
     location.hash = '#main';
+}
+
+
+function localStorageDataSort() { 
+	const set = [];
+	
+		for (let i = 0; i < localStorage.length; i++) {
+			let key = localStorage.key(i);
+    		if (key.startsWith('set_')) {
+    			let obj = JSON.parse(localStorage.getItem(key));
+    			obj.id = localStorage.key(i).slice(4);
+	        	set.push(obj);
+	    	}
+        }
+        
+		set.sort(function (a, b) {
+		  if (a.id > b.id) {
+		    return 1;
+		  }
+		  if (a.id < b.id) {
+		    return -1;
+		  }
+		  return 0;
+		});
+	return set;
 }
 
 
