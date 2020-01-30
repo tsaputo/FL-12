@@ -2,6 +2,10 @@ const root = document.getElementById('root');
 const createPage = document.getElementById('create');
 const editPage = document.getElementById('edit');
 const ZERO = 0;
+const POS_ONE = 1;
+const NEG_ONE = -1;
+const TWO = 2;
+const FOUR = 4;
 
 window.addEventListener('hashchange', renderPages);
 
@@ -24,10 +28,9 @@ function showEditPage() {
     }
     location.hash = 'edit';
 }
+
 window.onload = function () {
     renderPages();
-    renderCreatePage(createPage);
-    // renderEditPage(editPage);
 };
 
 
@@ -42,6 +45,7 @@ function renderPages() {
         renderMainPage();
     } else if (location.hash === '#create') {
         document.getElementById('create').style.display = 'block';
+        renderCreatePage(createPage);
     } else {
         document.getElementById('edit').style.display = 'block';
     }
@@ -78,7 +82,6 @@ function renderMainPage() {
             localStorage.removeItem(key);
             renderMainPage();
         });
-        // let valueObj = JSON.parse(set[i]);
         oneSetContainer.innerHTML = set[i].name;
         oneSetContainer.appendChild(editButton);
         oneSetContainer.appendChild(removeButton);
@@ -178,13 +181,13 @@ function renderEditPage(el, key) {
 function saveToLocalStorage(el, key) {
     let inputs = el.querySelectorAll('input');
     let value = {};
-    value.name = inputs[0].value;
+    value.name = inputs[ZERO].value;
     value.terms = [];
 
 
     for (let i = 1; i < inputs.length; i++) {
         let termDef = {};
-            if(!i%2 === 0) {
+            if(!i%TWO === ZERO) {
                 termDef.term = inputs[i].value;
                 termDef.definition = inputs[++i].value;
             }              
@@ -217,25 +220,25 @@ function saveToLocalStorage(el, key) {
 function localStorageDataSort() { 
 	const set = [];
 	
-		for (let i = 0; i < localStorage.length; i++) {
-			let key = localStorage.key(i);
-    		if (key.startsWith('set_')) {
-    			let obj = JSON.parse(localStorage.getItem(key));
-    			obj.id = localStorage.key(i).slice(4);
-	        	set.push(obj);
-	    	}
+    for (let i = 0; i < localStorage.length; i++) {
+        let key = localStorage.key(i);
+        if (key.startsWith('set_')) {
+            let obj = JSON.parse(localStorage.getItem(key));
+            obj.id = localStorage.key(i).slice(FOUR);
+            set.push(obj);
         }
+    }
         
-		set.sort(function (a, b) {
-		  if (a.id > b.id) {
-		    return 1;
-		  }
-		  if (a.id < b.id) {
-		    return -1;
-		  }
-		  return 0;
-		});
-	return set;
+    set.sort(function (a, b) {
+        if (a.id > b.id) {
+        return POS_ONE;
+        }
+        if (a.id < b.id) {
+        return NEG_ONE;
+        }
+        return ZERO;
+    });
+return set;
 }
 
 
