@@ -49,6 +49,12 @@ function renderPages() {
 
 
 function renderMainPage() {
+    for (let i = 0; i < localStorage.length; i++) {
+        let key = localStorage.key(i);
+        if (key === "lastId" && localStorage.length === 1) {
+            localStorage.clear();
+        }
+    }
 
     let element = document.getElementsByClassName('setsContainer')[ZERO];
     if (element) {
@@ -211,7 +217,6 @@ function saveToLocalStorage(el, key) {
     }
 
 }
-
     location.hash = '#main';
 }
 
