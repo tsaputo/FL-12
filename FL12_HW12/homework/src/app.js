@@ -11,6 +11,7 @@ window.addEventListener('hashchange', renderPages);
 
 function showMainPage() {
     location.hash = 'main';
+
 }
 
 function showCreatePage() {
@@ -51,7 +52,6 @@ function renderPages() {
     }
 }
 
-
 function renderMainPage() {
 
     let element = document.getElementsByClassName('setsContainer')[ZERO];
@@ -68,6 +68,7 @@ function renderMainPage() {
     for (let i = 0; i < set.length; i++) {
         let key = `set_${set[i].id}`;
 
+
         const oneSetContainer = document.createElement('div');
         const editButton = document.createElement('button');
         const removeButton = document.createElement('button');
@@ -79,7 +80,16 @@ function renderMainPage() {
         oneSetContainer.appendChild(removeButton);
         setsContainer.appendChild(oneSetContainer);
 
-        oneSetContainer.addEventListener('click', renderChecked);
+
+        let obj = JSON.parse(localStorage.getItem(key));
+        if (obj.isChecked) {
+            oneSetContainer.style.backgroundColor = 'green';
+        } else {
+            oneSetContainer.style.backgroundColor = 'pink';
+        }
+      
+        oneSetContainer.addEventListener('click', renderChecked.bind(this, key));
+
         oneSetContainer.addEventListener('click', renderMainPage, false);
                    
         editButton.addEventListener('click', function () {
@@ -91,19 +101,6 @@ function renderMainPage() {
             localStorage.removeItem(key);
             renderMainPage();
         });
-        
-        function renderChecked() {
-            let storageObj = JSON.parse(localStorage.getItem(key));
-            if (storageObj !== null) {
-                if (!storageObj.isChecked) {
-                    storageObj.isChecked = true;
-                } else {
-                    storageObj.isChecked = false;
-                }
-                    value = JSON.stringify(storageObj);
-                    localStorage.setItem(key, value);
-            }
-        }
     }
 }
 
@@ -128,7 +125,6 @@ function renderCreatePage(el) {
     cancelButton.addEventListener('click', function () {
         location.hash = '#main';
     });
-
 }
 
 function renderTermInput(el) {
@@ -233,9 +229,7 @@ function saveToLocalStorage(el, key) {
 
 function localStorageDataSort() { 
     let set = [];
-    const checkedSet = [];
-    
-	
+    const checkedSet = [];    	
     for (let i = 0; i < localStorage.length; i++) {
         let key = localStorage.key(i);
         if (key.startsWith('set_')) {
@@ -249,7 +243,6 @@ function localStorageDataSort() {
         }
     }
 
-    
     set.sort(function (a, b) {
         if (a.id > b.id) {
         return 1;
@@ -263,6 +256,23 @@ function localStorageDataSort() {
 set = set.concat(checkedSet);
 return set;
 }
+
+function renderChecked(key) {
+    if (key.startsWith('set_')) {
+        let storageObj = JSON.parse(localStorage.getItem(key));
+        if (storageObj !== null) {
+            if (!storageObj.isChecked) {
+                storageObj.isChecked = true;
+            } else {
+                storageObj.isChecked = false;
+            }
+            
+            let value = JSON.stringify(storageObj);
+            localStorage.setItem(key, value);
+        }
+    }
+}
+
 
 
 
