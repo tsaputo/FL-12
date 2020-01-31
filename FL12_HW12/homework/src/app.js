@@ -54,7 +54,6 @@ function renderPages() {
 
 function renderMainPage() {
 
-
     let element = document.getElementsByClassName('setsContainer')[ZERO];
     if (element) {
         element.remove();
@@ -70,9 +69,28 @@ function renderMainPage() {
         let key = `set_${set[i].id}`;
 
         const oneSetContainer = document.createElement('div');
+        const editButton = document.createElement('button');
+        const removeButton = document.createElement('button');
+        editButton.innerHTML = 'Edit';
+        removeButton.innerHTML = 'Remove';
         oneSetContainer.id = 'oneSetContainer';
+        oneSetContainer.innerHTML = set[i].name;
+        oneSetContainer.appendChild(editButton);
+        oneSetContainer.appendChild(removeButton);
+        setsContainer.appendChild(oneSetContainer);
+
         oneSetContainer.addEventListener('click', renderChecked);
         oneSetContainer.addEventListener('click', renderMainPage, false);
+                   
+        editButton.addEventListener('click', function () {
+            showEditPage();
+            renderEditPage(editPage, key);
+        });
+
+        removeButton.addEventListener('click', function () {
+            localStorage.removeItem(key);
+            renderMainPage();
+        });
         
         function renderChecked() {
             let storageObj = JSON.parse(localStorage.getItem(key));
@@ -86,38 +104,19 @@ function renderMainPage() {
                     localStorage.setItem(key, value);
             }
         }
-            
-        const editButton = document.createElement('button');
-        editButton.innerHTML = 'Edit';
-        editButton.addEventListener('click', function () {
-            showEditPage();
-            renderEditPage(editPage, key);
-        });
-        const removeButton = document.createElement('button');
-        removeButton.innerHTML = 'Remove';
-        removeButton.addEventListener('click', function () {
-            localStorage.removeItem(key);
-            renderMainPage();
-        });
-        oneSetContainer.innerHTML = set[i].name;
-        oneSetContainer.appendChild(editButton);
-        oneSetContainer.appendChild(removeButton);
-        setsContainer.appendChild(oneSetContainer);
-
     }
 }
 
 function renderCreatePage(el) {
     const setContainer = document.createElement('div');
-    setContainer.id = 'setContainer';
     const nameInput = document.createElement('input');
     const addTermButton = document.createElement('button');
     const saveSetButton = document.createElement('button');
     const cancelButton = document.createElement('button');
-
+    setContainer.id = 'setContainer';
+    nameInput.id = 'nameInput';
     el.appendChild(setContainer);
     setContainer.appendChild(nameInput);
-    nameInput.id = 'nameInput';
     setContainer.appendChild(addTermButton).innerHTML = 'Add term';
     setContainer.appendChild(saveSetButton).innerHTML = 'Save terms';
     setContainer.appendChild(cancelButton).innerHTML = 'Cancel';
@@ -134,12 +133,12 @@ function renderCreatePage(el) {
 
 function renderTermInput(el) {
     const termContainer = document.createElement('div');
-    termContainer.className = 'termContainer';
     const termInput = document.createElement('input');
-    termInput.className = 'termInput';
     const definitionInput = document.createElement('input');
-    definitionInput.className = 'definitionInput';
     const removeTermButton = document.createElement('button');
+    termContainer.className = 'termContainer';
+    termInput.className = 'termInput';
+    definitionInput.className = 'definitionInput';
     el.appendChild(termContainer);
     termContainer.appendChild(termInput).defaultValue = 'Term';
     termContainer.appendChild(definitionInput).defaultValue = 'Definition';
@@ -151,33 +150,30 @@ function renderTermInput(el) {
 }
 
 function renderEditPage(el, key) {
-
     let valueObj = JSON.parse(localStorage.getItem(key));
 
     const setEditContainer = document.createElement('div');
-    setEditContainer.className = 'setEditContainer';
     const nameInput = document.createElement('input');
     const addTermButton = document.createElement('button');
     const saveSetButton = document.createElement('button');
     const cancelButton = document.createElement('button');
-
+    setEditContainer.className = 'setEditContainer';
+    nameInput.id = 'newNameInput';
     el.appendChild(setEditContainer);
     setEditContainer.appendChild(nameInput).defaultValue = valueObj.name;
-    nameInput.id = 'newNameInput';
-
     setEditContainer.appendChild(addTermButton).innerHTML = 'Add term';
     setEditContainer.appendChild(saveSetButton).innerHTML = 'Save terms';
     setEditContainer.appendChild(cancelButton).innerHTML = 'Cancel';
 
-
     for (let i = 0; i < valueObj.terms.length; i++) {
         const termContainer = document.createElement('div');
-        termContainer.className = 'termContainer';
         const termInput = document.createElement('input');
-        termInput.className = 'termEditInput';
         const definitionInput = document.createElement('input');
-        definitionInput.className = 'definitionEditInput';
         const removeThisTermButton = document.createElement('button');
+        termContainer.className = 'termContainer';
+        termInput.className = 'termEditInput';
+        definitionInput.className = 'definitionEditInput';
+ 
         setEditContainer.appendChild(termContainer);
         termContainer.appendChild(termInput).defaultValue = valueObj.terms[i].term;
         termContainer.appendChild(definitionInput).defaultValue = valueObj.terms[i].definition;
