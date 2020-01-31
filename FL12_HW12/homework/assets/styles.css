@@ -24,3 +24,7 @@ h1 {
     height: 50px;
     flex-direction: column;
 }
+
+.chekedBGColor {
+    background-color: aquamarine;
+}

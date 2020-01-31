@@ -71,21 +71,20 @@ function renderMainPage() {
 
         const oneSetContainer = document.createElement('div');
         oneSetContainer.id = 'oneSetContainer';
-        oneSetContainer.onclick = function () {
-            if (this.style.backgroundColor) {
-                this.style.backgroundColor = '';
-                // let storageObj = JSON.parse(localStorage.getItem(key));
-                // storageObj.isChecked = false;
-                // value = JSON.stringify(storageObj);
-                // localStorage.setItem(key, value);
-            } else {
-                this.style.backgroundColor = '#09ba44';
-                // let storageObj = JSON.parse(localStorage.getItem(key));
-                // storageObj.isChecked =true;
-                // value = JSON.stringify(storageObj);
-                // localStorage.setItem(key, value);
+        oneSetContainer.addEventListener('click', renderChecked);
+        oneSetContainer.addEventListener('click', renderMainPage, false);
+        
+        function renderChecked() {
+            let storageObj = JSON.parse(localStorage.getItem(key));
+            if (storageObj !== null) {
+                if (!storageObj.isChecked) {
+                    storageObj.isChecked = true;
+                } else {
+                    storageObj.isChecked = false;
+                }
+                    value = JSON.stringify(storageObj);
+                    localStorage.setItem(key, value);
             }
-
         }
             
         const editButton = document.createElement('button');
