@@ -2,10 +2,10 @@ const root = document.getElementById('root');
 const createPage = document.getElementById('create');
 const editPage = document.getElementById('edit');
 const ZERO = 0;
-const POS_ONE = 1;
-const NEG_ONE = -1;
 const TWO = 2;
 const FOUR = 4;
+const NEG_ONE = -1;
+const POS_ONE = 1;
 
 window.addEventListener('hashchange', renderPages);
 
@@ -15,6 +15,7 @@ function showMainPage() {
 
 function showCreatePage() {
     location.hash = 'create';
+    
     let termContainers = document.getElementsByClassName('termContainer');
     for (let i = 0; i < termContainers.length; i++) {
         termContainers[i].innerHTML = '';
@@ -28,9 +29,9 @@ function showEditPage() {
     }
     location.hash = 'edit';
 }
-
 window.onload = function () {
     renderPages();
+    renderCreatePage(createPage);
 };
 
 
@@ -45,7 +46,6 @@ function renderPages() {
         renderMainPage();
     } else if (location.hash === '#create') {
         document.getElementById('create').style.display = 'block';
-        renderCreatePage(createPage);
     } else {
         document.getElementById('edit').style.display = 'block';
     }
@@ -70,6 +70,24 @@ function renderMainPage() {
         let key = `set_${set[i].id}`;
 
         const oneSetContainer = document.createElement('div');
+        oneSetContainer.id = 'oneSetContainer';
+        oneSetContainer.onclick = function () {
+            if (this.style.backgroundColor) {
+                this.style.backgroundColor = '';
+                // let storageObj = JSON.parse(localStorage.getItem(key));
+                // storageObj.isChecked = false;
+                // value = JSON.stringify(storageObj);
+                // localStorage.setItem(key, value);
+            } else {
+                this.style.backgroundColor = '#09ba44';
+                // let storageObj = JSON.parse(localStorage.getItem(key));
+                // storageObj.isChecked =true;
+                // value = JSON.stringify(storageObj);
+                // localStorage.setItem(key, value);
+            }
+
+        }
+            
         const editButton = document.createElement('button');
         editButton.innerHTML = 'Edit';
         editButton.addEventListener('click', function () {
@@ -182,6 +200,7 @@ function saveToLocalStorage(el, key) {
     let inputs = el.querySelectorAll('input');
     let value = {};
     value.name = inputs[ZERO].value;
+    value.isChecked = false;
     value.terms = [];
 
 
@@ -218,26 +237,35 @@ function saveToLocalStorage(el, key) {
 
 
 function localStorageDataSort() { 
-	const set = [];
+    let set = [];
+    const checkedSet = [];
+    
 	
     for (let i = 0; i < localStorage.length; i++) {
         let key = localStorage.key(i);
         if (key.startsWith('set_')) {
             let obj = JSON.parse(localStorage.getItem(key));
             obj.id = localStorage.key(i).slice(FOUR);
-            set.push(obj);
+            if (!obj.isChecked) {
+                set.push(obj);
+            } else {
+                checkedSet.push(obj);
+            }
         }
     }
-        
+
+    
     set.sort(function (a, b) {
         if (a.id > b.id) {
-        return POS_ONE;
+        return 1;
         }
         if (a.id < b.id) {
         return NEG_ONE;
         }
         return ZERO;
     });
+
+set = set.concat(checkedSet);
 return set;
 }
 
