@@ -15,28 +15,30 @@ h1, h3 {
     }
 }
 
-.mixin(@bgColor) {
+.bgColor(@bgColor) {
     color: @white;
     background-color: @bgColor;
-  }
-
-.card__item--red {
-    .mixin(@red);
 }
 
-.card__item--green {
-    .mixin(@green);
-}
+.cards__card {
+    &--red {
+        .bgColor(@red);
+    }
 
-.card__item--blue {
-    .mixin(@blue);
-}
+    &--green {
+        .bgColor(@green);
+    }
 
-.card__item--orange {
-    .mixin(@orange);
+    &--blue {
+        .bgColor(@blue);
+    }
+
+    &--orange {
+        .bgColor(@orange);
+    }
 }
 
 .footer--grey {
-    background-color: @grey;
+    .bgColor(@grey);
 }
 
