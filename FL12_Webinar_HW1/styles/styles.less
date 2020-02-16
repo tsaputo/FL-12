@@ -1,0 +1,42 @@
+@import "variables.less";
+
+h1, h3 {
+    color: @blue;
+    border-bottom: 1px solid @blue;
+}
+
+.nav-item {
+    &.active {
+        background-color: @blue;
+
+        .nav-link {
+            color: @white;
+        }
+    }
+}
+
+.mixin(@bgColor) {
+    color: @white;
+    background-color: @bgColor;
+  }
+
+.card-item--red {
+    .mixin(@red);
+}
+
+.card-item--green {
+    .mixin(@green);
+}
+
+.card-item--blue {
+    .mixin(@blue);
+}
+
+.card-item--orange {
+    .mixin(@orange);
+}
+
+.footer--grey {
+    background-color: @grey;
+}
+
