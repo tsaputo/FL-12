@@ -1,36 +1,43 @@
+const _cards = Symbol('cards');
+
 class Deck {
     constructor () {
-        this.cards = new Array();
+        // this.cards = new Array();
         const suits = ["hearts","diamonds","clubs","sprades"];
         let ranksAmount = 13;
-        for (let j = 0; j < suits.length; j++) {
-            for (let i = 1; i <= ranksAmount; i++) {
-                this.cards.push(new Card(suits[j], i));
+        this[_cards] = function () {
+            let arr = [];
+            for (let j = 0; j < suits.length; j++) {
+                for (let i = 1; i <= ranksAmount; i++) {
+                    arr.push(new Card(suits[j], i));
+                }
             }
-        }
+            return arr;
+        }();
+
     }
 
     shuffle() {
-        for (let i = this.cards.length - 1; i >= 0; i-- ) {
+        for (let i = this[_cards].length - 1; i >= 0; i-- ) {
             let randomIndex = Math.floor(Math.random() * (i + 1));
-            let itemAtIndex = this.cards[randomIndex];
+            let itemAtIndex = this[_cards][randomIndex];
 
-            this.cards[randomIndex] = this.cards[i];
-            this.cards[i] = itemAtIndex;
+            this[_cards][randomIndex] = this[_cards][i];
+            this[_cards][i] = itemAtIndex;
         }
-        return this.cards;
+        return this[_cards];
     }
 
     draw(n) {
         let popped = [];
         for (let i = 0; i < n; i++) {
-            popped.push(this.cards.pop());
+            popped.push(this[_cards].pop());
         } 
         return popped;
     }
 
     get count () {
-        return this.cards.length;
+        return this[_cards].length;
     }
 
 
@@ -48,7 +55,7 @@ class Card {
     }
     
     toString() { 
-        let vaules = {1: "Ace", 2: "2", 3: "3", 4: "4",
+        const vaules = {1: "Ace", 2: "2", 3: "3", 4: "4",
         5: "5", 6: "6", 7:"7", 8: "8", 9:"9", 
         10:"10", 11: "Jack", 12: "Queen", 13: "King"};
         cardRankVal = vaules[this.rank];
@@ -74,7 +81,6 @@ class Player {
     }
 
     static play = function (playerOne, playerTwo) { 
-        debugger;
         playerOne.wins = 0;
         playerTwo.wins = 0;
         playerOne.deck = new Deck;
