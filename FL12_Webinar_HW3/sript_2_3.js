@@ -1,12 +1,12 @@
 class Employee {
-   constructor(id, firstName, lastName, birthday, salary, department, position) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.birthday = birthday;
-        this.salary = salary;
-        this.department = department;
-        this.position = position;
+   constructor(obj) {
+        this.id = obj.id;
+        this.firstName = obj.firstName;
+        this.lastName = obj.lastName;
+        this.birthday = obj.birthday;
+        this.salary = obj.salary;
+        this.department = obj.department;
+        this.position = obj.position;
         Employee.EMPLOYEES.push(this);
    } 
    
@@ -49,7 +49,6 @@ class Employee {
    }
 
    getPromoted (benefits) {
-       debugger;
        for  (let key in benefits) {
             if (key === "salary") {
                 this.changeSalary(benefits.salary);
@@ -78,14 +77,13 @@ class Employee {
 }
 
 class Manager extends Employee {
-    constructor(id, firstName, lastName, birthday, salary, department) {
-        super(id, firstName, lastName, birthday, salary, department);
+    constructor(obj) {
+        super(obj);
         this.position = "manager";
     }
 
     get managedEmployees() {
         let managedEmployees = [];
-        debugger;
         let currentEmployees = Employee.EMPLOYEES;
         for (let i = 0; i < currentEmployees.length; i++) {
             if (currentEmployees[i].department === this.department && currentEmployees[i].position !== 'manager') {
@@ -97,19 +95,23 @@ class Manager extends Employee {
 }
 
 class BlueCollarWorker extends Employee {
-    constructor(id, firstName, lastName, birthday, salary, department, position) {
-        super(id, firstName, lastName, birthday, salary, position, department, position);
+    constructor(obj) {
+        super(obj);
     }
 }
 
 class HRManager extends Manager {
-    constructor(id, firstName, lastName, birthday, salary, department, position) {
-        super(id, firstName, lastName, birthday, salary, position, department, position);
+    constructor(obj) {
+        super(obj);
     }
 }
 
 class SalesManager extends Manager {
-    constructor(id, firstName, lastName, birthday, salary, department, position) {
-        super(id, firstName, lastName, birthday, salary, position, department, position);
+    constructor(obj) {
+        super(obj);
     }
+}
+
+function ManagerPro() {
+    
 }
