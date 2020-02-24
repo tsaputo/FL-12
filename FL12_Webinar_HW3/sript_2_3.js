@@ -12,7 +12,7 @@ class Employee {
         this.position = obj.position;
         Employee.EMPLOYEES.push(this);
    } 
-   
+
    static EMPLOYEES = [];
 
    get age () {

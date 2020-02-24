@@ -1,6 +1,6 @@
 //task1
 function Deck() {
-    var suits = ["hearts", "diamonds", "clubs", "sprades"];
+    var suits = ['hearts', 'diamonds', 'clubs', 'sprades'];
     var ranksAmount = 13;
 
     var _cards = function () {
@@ -35,15 +35,15 @@ function Deck() {
         return _cards.length;
     }
 
-};
+}
 
 
 function Card(suit, rank) {
     var _suit = suit;
     var _rank = rank;
-    var _vaules = {1: "Ace", 2: "2", 3: "3", 4: "4",
-    5: "5", 6: "6", 7:"7", 8: "8", 9:"9", 
-    10: "10", 11: "Jack", 12: "Queen", 13: "King"};
+    var _vaules = {1: 'Ace', 2: '2', 3: '3', 4: '4',
+    5: '5', 6: '6', 7:'7', 8: '8', 9:'9', 
+    10: '10', 11: 'Jack', 12: 'Queen', 13: 'King'};
 
     this.getRank = function() {
         return _rank;
@@ -53,18 +53,16 @@ function Card(suit, rank) {
         return _suit;
     }
 
-    this.getValues = function() {
-        return _values;
-    }
-
     this.isFacedCard = function () {
         if (_rank === 1 || _rank > 10) {
              return true;
-        } else return false;
+        } else {
+            return false;
+        }
     }
 
     this.toString = function () { 
-        cardRankVal = _vaules[_rank];
+        var cardRankVal = _vaules[_rank];
         return `${cardRankVal} of ${[_suit]}`;
     }
 
@@ -74,10 +72,9 @@ function Card(suit, rank) {
 }
 
 
-
-function Player(name, wins) {
+function Player(name) {
     var _name = name;
-    var _wins = wins;
+    var _wins = 0;
 
     this.getName = function() {
         return _name;
@@ -87,19 +84,18 @@ function Player(name, wins) {
         return _wins;
     }
 
-    this.setWins = function(wins) {
-        this._wins = wins;
+    this.resSetWins = function() {
+         _wins = 0;
     }
 
     this.addWins = function() {
-        _wins++;
+        return _wins++;
     }
 
 
     this.play = function(anotherPlayer) {
-        this.setWins(0);
-        anotherPlayer.setWins(0);
-        debugger;
+        this.resSetWins();
+        anotherPlayer.resSetWins();
         this.deck = new Deck();
         this.deck.shuffle();
         anotherPlayer.deck = new Deck();
