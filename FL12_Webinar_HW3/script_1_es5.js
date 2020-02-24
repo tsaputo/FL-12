@@ -1,7 +1,8 @@
 //task1
 
-const _cards = Symbol('cards');
-
+function Deck() {
+    
+}
 class Deck {
     constructor () {
         const suits = ["hearts", "diamonds", "clubs", "sprades"];
@@ -77,19 +78,13 @@ class Card {
 class Player {
     constructor (name) {
         this.name = name;
-        this._wins = 0;
+        this.wins = 0;
         this.deck;
     }
 
-    addWin(){
-        this._wins++;
-    }
-
-
-
     static play = function (playerOne, playerTwo) { 
-        playerOne._wins = 0;
-        playerTwo._wins = 0;
+        playerOne.wins = 0;
+        playerTwo.wins = 0;
         playerOne.deck = new Deck;
         playerTwo.deck = new Deck;
         playerOne.deck.shuffle();
@@ -99,16 +94,16 @@ class Player {
             let playerSecondCard = playerTwo.deck.draw(1)[0];
             let winnerCard = Card.compare(playerOneCard,playerSecondCard);
             if (winnerCard === "cardOne") {
-                playerOne.addWin();
+                playerOne.wins++;
             } else if (winnerCard === "cardTwo") {
-                playerTwo.addWin();
+                playerTwo.wins++;
             }
         }
 
         if (playerOne.wins > playerTwo.wins) {
-            return `${playerOne.name} wins ${playerOne._wins} to ${playerTwo._wins}`
+            return `${playerOne.name} wins ${playerOne.wins} to ${playerTwo.wins}`
         } else {
-            return `${playerTwo.name} wins ${playerTwo._wins} to ${playerOne._wins}`
+            return `${playerTwo.name} wins ${playerTwo.wins} to ${playerOne.wins}`
         }
     }
 }
