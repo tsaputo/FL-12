@@ -86,13 +86,11 @@ class Player {
         this._wins++;
     }
 
-
-
     static play = function (playerOne, playerTwo) { 
         playerOne._wins = 0;
         playerTwo._wins = 0;
-        playerOne.deck = new Deck;
-        playerTwo.deck = new Deck;
+        playerOne.deck = new Deck();
+        playerTwo.deck = new Deck();
         playerOne.deck.shuffle();
         playerTwo.deck.shuffle();
         while (playerOne.deck.count > 0) {
