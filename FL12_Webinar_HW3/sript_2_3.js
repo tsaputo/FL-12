@@ -106,12 +106,14 @@ class BlueCollarWorker extends Employee {
 class HRManager extends Manager {
     constructor(obj) {
         super(obj);
+        this.department = "hr";
     }
 }
 
 class SalesManager extends Manager {
     constructor(obj) {
         super(obj);
+        this.department = "sls";
     }
 }
 
