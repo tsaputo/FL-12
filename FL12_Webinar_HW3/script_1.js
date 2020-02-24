@@ -1,9 +1,10 @@
+//task1
+
 const _cards = Symbol('cards');
 
 class Deck {
     constructor () {
-        // this.cards = new Array();
-        const suits = ["hearts","diamonds","clubs","sprades"];
+        const suits = ["hearts", "diamonds", "clubs", "sprades"];
         let ranksAmount = 13;
         this[_cards] = function () {
             let arr = [];

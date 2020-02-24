@@ -1,5 +1,8 @@
+//task2
+
 class Employee {
    constructor(obj) {
+       
         this.id = obj.id;
         this.firstName = obj.firstName;
         this.lastName = obj.lastName;
@@ -112,6 +115,20 @@ class SalesManager extends Manager {
     }
 }
 
-function ManagerPro() {
-    
+//task3
+
+const promoter = (state) => ({
+    promote(benefits, id) {
+        let ourState = state.managedEmployees.find((el) => {if (el.id === id) {return el;}});
+        if (ourState !== undefined && ourState instanceof Employee) {
+            ourState.getPromoted(benefits);
+        } else return "no elements with such index!"
+    }
+});
+
+function ManagerPro(manager) {
+    return Object.assign(
+        manager,
+        promoter(manager),
+    )
 }
