@@ -1,6 +1,7 @@
 //task1
 
 const _cards = Symbol('cards');
+const _suit = Symbol('suit');
 
 class Deck {
     constructor () {
@@ -46,7 +47,7 @@ class Deck {
 
 class Card {
     constructor (suit, rank) {
-        this.suit = suit;
+        this[_suit] = suit;
         this.rank = rank;
         this.isFacedCard = function () {
             if (rank === 1 || rank > 10) {
