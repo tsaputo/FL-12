@@ -1,4 +1,4 @@
-1.
+//1.
 function maxElement(arr) {
    return Math.max(...arr);
 }
@@ -7,7 +7,7 @@ function maxElement(arr) {
 // const arr = [1, 2, 3 , 4]
 // maxElement(arr);
 
-2.
+//2.
 function copyArray(arr) {
    return new Array(...arr); // or  [...arr]
 }
@@ -19,7 +19,7 @@ function copyArray(arr) {
 // console.log(arr === copiedArr);
 
 
-3. 
+//3. 
 function addUniqueId(obj) {
    return {
        id: Symbol(),
@@ -30,7 +30,7 @@ function addUniqueId(obj) {
 // Example:
 // addUniqueId({name: "Ivan"});
 
-4. 
+//4. 
 function regroupObject({name: firstName, details: {id, age, university } }) {
    return {
         university,
@@ -46,7 +46,7 @@ function regroupObject({name: firstName, details: {id, age, university } }) {
 // const oldObj = {name: 'Someone', details: {id: 1, age: 11, university: 'UNI'}}
 // regroupObject(oldObj);
 
-5. 
+//5. 
 function findUniqueElements(arr) {
    let uniqueElements = new Set(arr);
    return [...uniqueElements];
@@ -56,7 +56,7 @@ function findUniqueElements(arr) {
 // const arr = [1, 1, 2, 3, 20, 2, 20, 10, 15, 1]
 // findUniqueElements(arr);
 
-6. 
+//6. 
 function hideNumber(number) {
     const charsToShow = 4;    
     return number.slice(-charsToShow).padStart(number.length, '*');
@@ -67,7 +67,7 @@ function hideNumber(number) {
 // console.log(hideNumber(phoneNumber));
 
 
-7.
+//7.
 function required() {
   throw new Error("Missing property");
 }
@@ -80,7 +80,7 @@ function add(x = required(), y = required()) {
 // add(1, 2);
 // add(1);
 
-8. 
+//8. 
 const usersUrl = "https://jsonplaceholder.typicode.com/users"
 function loadUserNames(url, callback) {
     fetch(url)
@@ -93,7 +93,7 @@ function loadUserNames(url, callback) {
 // Example:
 // loadUserNames(usersUrl, (names) => { console.log(names)});
 
-9. 
+//9. 
 const usersUrl = "https://jsonplaceholder.typicode.com/users"
 async function loadUserNamesAsync(url) {
     let response = await fetch(url);
