@@ -1,4 +1,5 @@
-fetch('https://jsonplaceholder.typicode.com/users')
+function loadUsers() {
+	fetch('https://jsonplaceholder.typicode.com/users')
 	.then(response => response.json())
 	.then(users => {
 		// we got users
@@ -27,6 +28,7 @@ fetch('https://jsonplaceholder.typicode.com/users')
 
 		}
 	});
+}
 
 function createAvatarColumn(user) {
 	let column = document.createElement('td');
@@ -39,7 +41,6 @@ function createAvatarColumn(user) {
 
 	return column;
 }
-
 
 function createColumn(name, content) {
 	let column = document.createElement('td');
@@ -179,6 +180,23 @@ function updateUser(row, user) {
 }
 
 function loadUserPosts() {
+	let userId = new URL(location.href).searchParams.get('userId');
 
+	fetch(`https://jsonplaceholder.typicode.com/posts?userId=${userId}`)
+  		.then(response => response.json())
+  		.then(posts => {
+			let postsTable = document.getElementById('posts');
+
+			for(let post of posts) {
+				let row = document.createElement('tr');
+
+				row.appendChild(createColumn('id', post.id));
+				row.appendChild(createColumn('title', post.title));
+				row.appendChild(createColumn('body', post.body));
+				//row.appendChild(createColumn('id', post.id));
+
+				postsTable.appendChild(row);
+			}
+		});
 }
 
