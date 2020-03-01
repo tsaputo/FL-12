@@ -190,14 +190,48 @@ function loadUserPosts() {
 			for(let post of posts) {
 				let row = document.createElement('tr');
 
-				row.appendChild(createColumn('id', post.id));
-				row.appendChild(createColumn('title', post.title));
+				row.appendChild(createTextColumn(post.id));
+				row.appendChild(createTextColumn(post.title));
 				row.appendChild(createTextColumn(post.body));
-				//row.appendChild(createColumn('id', post.id));
+				loadComments(post.id, row);
 
 				postsTable.appendChild(row);
 			}
 		});
+}
+
+function loadComments(postId, row) {
+	fetch(`https://jsonplaceholder.typicode.com/posts/${postId}/comments`)
+		.then(response => response.json())
+		.then(comments => {
+				let column = document.createElement('td');
+				row.appendChild(column);
+
+				column.innerHTML = ' \
+					<table> \
+						<tr> \
+							<th>Id</th> \
+							<th>Name</th> \
+							<th>Email</th> \
+							<th>Body</th> \
+						</tr> \
+					</table>';
+
+				let commentsTable = column.getElementsByTagName('table')[0];
+
+				for(let comment of comments) {
+					let row = document.createElement('tr');
+					row.appendChild(createTextColumn(comment.id));
+					row.appendChild(createTextColumn(comment.name));
+					row.appendChild(createTextColumn(comment.email));
+					row.appendChild(createTextColumn(comment.body));
+
+					commentsTable.appendChild(row);
+				}
+
+		}
+		)
+	
 }
 
 function createTextColumn(content) {
@@ -209,4 +243,6 @@ function createTextColumn(content) {
 
 	return column;
 }
+
+
 
