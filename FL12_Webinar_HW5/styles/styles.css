@@ -3,7 +3,9 @@ input[readonly] {
 }
 
 input[readonly]:focus {
-	border: none;
+  border: none;
+  outline: none;
+  box-shadow: none;
 }
 
 #overlay {
