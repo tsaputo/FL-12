@@ -192,11 +192,21 @@ function loadUserPosts() {
 
 				row.appendChild(createColumn('id', post.id));
 				row.appendChild(createColumn('title', post.title));
-				row.appendChild(createColumn('body', post.body));
+				row.appendChild(createTextColumn(post.body));
 				//row.appendChild(createColumn('id', post.id));
 
 				postsTable.appendChild(row);
 			}
 		});
+}
+
+function createTextColumn(content) {
+	let column = document.createElement('td');
+
+	let span = document.createElement('span');
+	span.innerHTML = content;
+	column.appendChild(span);
+
+	return column;
 }
 
