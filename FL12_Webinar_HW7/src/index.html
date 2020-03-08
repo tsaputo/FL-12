@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang='en'> 
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+	<title>FL_WEBINAR_HW7</title>
+	<script src="dist/bundle.js"></script>
+</head>
+
+<body>
+	<header>
+		<section class='header'>
+			<div сlass='header-item__head'>
+				<h1>Rock, Paper, or Scissors</h1>
+				<h2>Rules:</h2>				
+			</div>
+			<div сlass='header-item__description'>
+			<ul>
+				<li>Scissors beats a paper,</li>
+				<li>Paper beats rock,</li>
+				<li>Rock beats scissors</li>
+				<li>And we play up to three wins!</li>
+			</ul>
+			</div>
+		</section>
+	</header>
+	<main>
+		<section class='main'>
+			<h2>Let's play!</h2>
+			<div class='button-container'>
+				<div class='buttons__item'>
+					<button type='button' id='button-reset' onclick="gameReset()">Reset</button>
+				</div>
+				<p>Make your choice!</p>
+				<div class='buttons__item gameButtons'>
+					<button type='button' id='rock' onclick="myChoice(this)">
+						<span class="button__inner">
+	        				<span class="icon">
+	        					<img src="img/rock.png">
+	        				</span>
+   						</span>
+					</button>
+	            	<button type='button' id='paper' onclick="myChoice(this)">
+						<span class="button__inner">
+	        				<span class="icon">
+	        					<img src="img/paper.png">
+	        				</span>
+   						</span>
+	            	</button>
+	           		<button type='button' id='scissors' onclick="myChoice(this)">
+						<span class="button__inner">
+	        				<span class="icon">
+	        					<img src="img/scissors.png">
+	        				</span>
+   						</span>
+	           		</button>	
+           		</div>
+			</div>
+			<div id='results-container'>
+			</div>		
+		</section>
+	</main>	
+</body>

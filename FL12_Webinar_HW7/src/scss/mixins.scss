@@ -1,0 +1,15 @@
+@mixin bordered($color, $width: 3px) {
+    padding: 0;
+    color: $color;
+    border: $width solid black;
+    &:hover { 
+        color: lighten($color, 20%)
+    }
+}
+
+@mixin centered {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
