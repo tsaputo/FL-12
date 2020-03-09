@@ -1,7 +1,3 @@
-import buttonsEnable from './buttonsEnabler.js'
-import buttonsDisable from './buttonsDisabler.js'
-
-
 const MAX_ROUNDS = 3;
 
 let currentRound = 0;

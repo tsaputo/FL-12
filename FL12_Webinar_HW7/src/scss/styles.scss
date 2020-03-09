@@ -1,11 +1,24 @@
-@import "variables.scss";
-
 h1 {
     color: $blue;
     border-bottom: 1px solid $blue;
-}
+};
 
 .header {
     @include centered;
+    li {
+        list-style-type: none;
+    }
+}
+
+.main {
+    @include centered;
+
+    button {
+        @include bordered($red);
+
+        img {
+            width: 100px;
+        }
+    }
 }
 
