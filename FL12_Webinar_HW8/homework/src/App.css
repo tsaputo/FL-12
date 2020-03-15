@@ -1,0 +1,93 @@
+html, body {
+    height: 100%;
+    overflow: hidden;
+    margin: 0;
+}
+
+#root {
+    min-height: 100%;
+    background-color: #DADCDE;
+    display: flex;
+    justify-content: center;
+}
+.App {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+}
+
+label {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+input {
+    margin-top: 5px;
+    border-radius: 5px;
+    height: 30px;
+}
+
+.input__search {
+    min-width: 680px;
+    margin-right: 10px
+}
+
+textarea {
+    margin-top: 5px;
+    border-radius: 5px;
+}
+
+.mainButton {
+    margin-top: 10px;
+    height: 30px;
+    width: 100px;
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+    background-color: #63a4ff;
+    background-image: linear-gradient(315deg, #63a4ff 0%, #83eaf1 74%);
+}
+
+.popup {
+    display: flex;
+    justify-content: center;
+    background-color: white;
+    border-radius: 10px;
+    width: 500px;
+}
+
+.popup form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.popup__items {
+    display: flex;
+    flex-direction: row;
+}
+
+.button__items {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.courseItem {
+    margin: 20px 0;
+    background-color: white;
+    border-radius: 10px;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#button--more svg{
+    padding: 10px;
+    height: 20px;
+    width: 20px;
+}
+
