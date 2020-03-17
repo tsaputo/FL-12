@@ -1,0 +1,12 @@
+<form [formGroup]="editForm">
+    <input value="{{user.name}}" 
+           formControlName="userName"/>
+    <input value="{{user.email}}"
+            formControlName="userEmail"/>
+    <input value="{{user.phone}}" 
+            formControlName="userPhone"/>
+    <span>
+        <button name='cancel' (click)='cancel()'>Cancel</button>
+        <button name='save' (click)='save(user)'>Save</button>
+    </span>
+</form>

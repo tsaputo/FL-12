@@ -1,0 +1,16 @@
+
+<div>
+  <input 
+    name="searchBar"
+    placeholder="Search..."
+    [(ngModel)]="searchString" 
+  />
+  
+  <button 
+    name="addUser"
+    (click)="addUser()">
+  </button> 
+
+</div>
+
+<app-users-list [users]='userService.getUsers() | usersFilter:searchString'></app-users-list>

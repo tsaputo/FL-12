@@ -1,0 +1,17 @@
+
+
+
+<div *ngFor='let user of users'>
+    <div *ngIf="editableUserId == user.id; else readOnlyRecord">
+        <app-user-edit-form [user]="user" (onCancelEdit)="handleUserEditCancel()" ></app-user-edit-form>
+    </div>
+    <ng-template #readOnlyRecord>
+        <span>{{user.name}}</span>
+        <span>{{user.email}}</span>
+        <span>{{user.phone}}</span>
+        <span>
+            <button name='editUser' (click)='editUser(user)'>Edit</button>
+            <button name='deleteUser' (click)='deleteUser(user)'>Delete</button>
+        </span>
+    </ng-template>
+</div>
