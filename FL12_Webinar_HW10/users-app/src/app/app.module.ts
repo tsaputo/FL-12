@@ -5,7 +5,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UsersListComponent } from './users-list/users-list.component';
-import { SearchBarComponent } from './search-bar/search-bar.component';
 import { UsersFilterPipe } from './shared/users-filter.pipe';
 import { UserEditFormComponent } from './user-edit-form/user-edit-form.component'
 
@@ -13,7 +12,6 @@ import { UserEditFormComponent } from './user-edit-form/user-edit-form.component
   declarations: [
     AppComponent,
     UsersListComponent,
-    SearchBarComponent,
     UsersFilterPipe,
     UserEditFormComponent
   ],

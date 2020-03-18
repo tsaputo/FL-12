@@ -10,41 +10,37 @@ import { UserService } from '../shared/user.service';
 })
 export class UserEditFormComponent implements OnInit {
   @Input()
-  user :User;
+  user :User = {id: "", name: "", email: "", phone: ""};
   @Output()
   onCancelEdit = new EventEmitter();
-    
-  userName: string;
-  userEmail: string;
-  userPhone: string;
+  @Output()
+  onSaveEdit = new EventEmitter<User>();
 
-  editForm = new FormGroup({
-    userName: new FormControl(null, Validators.required),
-    userEmail: new FormControl(null, Validators.required),
-    userPhone: new FormControl(null, Validators.required)
-  });
+  editForm :FormGroup;
+  requiredFieldsMissing :boolean = false;
 
   constructor(private userService :UserService) { }
   
   ngOnInit(): void {
-    if (!this.user.id) {
-      this.createEditForm();
-    }
-  }
-
-  save(user :User) {
-    this.userService.saveUser(user);
-  }
-
-  cancel() {
-    this.onCancelEdit.emit();
-  }
-
-  createEditForm() {
     this.editForm = new FormGroup({
-      userName: new FormControl(null, Validators.required),
-      userEmail: new FormControl(null, Validators.required),
-      userPhone: new FormControl(null, Validators.required)
+        userName: new FormControl(this.user ? this.user.name : null, Validators.required),
+        userEmail: new FormControl(this.user ? this.user.email : null, Validators.required),
+        userPhone: new FormControl(this.user ? this.user.phone : null, Validators.required)
     });
+  }
+
+  save() {
+    if (!this.editForm.valid) {
+      this.requiredFieldsMissing =true;
+      return;
+    }
+    this.user.name = this.editForm.controls["userName"].value;
+    this.user.email = this.editForm.controls["userEmail"].value;
+    this.user.phone = this.editForm.controls["userPhone"].value;
+    this.onSaveEdit.emit(this.user);
+  }
+
+  cancel() { 
+    this.onCancelEdit.emit();
   }
 }  

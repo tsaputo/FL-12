@@ -1,9 +1,8 @@
-
-
-
-<div *ngFor='let user of users'>
+<div class="item-container" *ngFor='let user of users'>
     <div *ngIf="editableUserId == user.id; else readOnlyRecord">
-        <app-user-edit-form [user]="user" (onCancelEdit)="handleUserEditCancel()" ></app-user-edit-form>
+        <app-user-edit-form [user]="user" 
+        (onCancelEdit)="handleUserEditCancel()"
+        (onSaveEdit)="handleUserSave($event)" ></app-user-edit-form>
     </div>
     <ng-template #readOnlyRecord>
         <span>{{user.name}}</span>

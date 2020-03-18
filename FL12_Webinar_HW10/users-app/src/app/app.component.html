@@ -9,8 +9,19 @@
   <button 
     name="addUser"
     (click)="addUser()">
+    Add new User
   </button> 
 
 </div>
 
-<app-users-list [users]='userService.getUsers() | usersFilter:searchString'></app-users-list>
+<div class="item-container" *ngIf="addUserMode">
+  <div>
+      <app-user-edit-form 
+        (onCancelEdit)="handleUserAddCancel()"
+        (onSaveEdit)="handleUserSave($event)" >
+    </app-user-edit-form>
+  </div>
+</div>
+
+<app-users-list [users]='userService.getUsers() | usersFilter:searchString'>
+</app-users-list>

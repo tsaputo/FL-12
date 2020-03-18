@@ -1,12 +1,9 @@
-<form [formGroup]="editForm">
-    <input value="{{user.name}}" 
-           formControlName="userName"/>
-    <input value="{{user.email}}"
-            formControlName="userEmail"/>
-    <input value="{{user.phone}}" 
-            formControlName="userPhone"/>
+<form [formGroup]="editForm" [class.error]="requiredFieldsMissing == true">
+    <input formControlName="userName"/>
+    <input formControlName="userEmail"/>
+    <input formControlName="userPhone"/>
     <span>
         <button name='cancel' (click)='cancel()'>Cancel</button>
-        <button name='save' (click)='save(user)'>Save</button>
+        <button name='save' (click)='save()'>Save</button>
     </span>
 </form>

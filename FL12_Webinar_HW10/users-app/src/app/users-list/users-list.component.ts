@@ -12,6 +12,7 @@ export class UsersListComponent {
   @Input()
   users: User[];
 
+  @Input()
   editableUserId :string;
 
 
@@ -22,10 +23,15 @@ export class UsersListComponent {
   }
 
   deleteUser(user :User) {
-    this.userService.deleteUser(user.name);
+    this.userService.deleteUser(user.id);
   }
 
   handleUserEditCancel() {
+    this.editableUserId = null;
+  }
+
+  handleUserSave(user :User) {
+    this.userService.saveUser(user);
     this.editableUserId = null;
   }
 }

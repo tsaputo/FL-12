@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { UserService } from './shared/user.service';
-
+import { User } from './constants';
 
 @Component({
   selector: 'app-root',
@@ -10,11 +10,21 @@ import { UserService } from './shared/user.service';
 
 export class AppComponent {
   searchString :string;
+  addUserMode:boolean = false;
 
   constructor(public userService: UserService) { }
 
   addUser() {
-    alert('sss');
+    this.addUserMode = true;
+  }
+
+  handleUserAddCancel() {
+    this.addUserMode = false;
+  }
+
+  handleUserSave(user :User) {
+    this.userService.saveUser(user);
+    this.addUserMode = false;
   }
 
 }
