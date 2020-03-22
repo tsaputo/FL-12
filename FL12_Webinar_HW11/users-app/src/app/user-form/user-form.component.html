@@ -1,0 +1,20 @@
+<div>
+  <button routerLink="/users"><--</button>
+</div>
+
+<form *ngIf="user$ | async; else loading" [formGroup]='userForm' (submit)="saveUser()">
+  <input type="text" formControlName="name"/>
+  <input type="text" formControlName="email"/>
+  <input type="text" formControlName="phone"/>
+  <input type="text" formControlName="website"/>
+  <input type="text" formControlName="address"/>
+  <span>
+      <button routerLink="/users" name='cancel'>Cancel</button>
+      <button type="submit" [disabled]="!userForm.valid">Save</button>
+  </span>
+</form>
+
+<ng-template #loading>
+  Loading User...
+</ng-template>
+

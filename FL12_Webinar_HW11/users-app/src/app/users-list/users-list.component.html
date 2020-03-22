@@ -1,0 +1,5 @@
+<ul>
+  <li *ngFor="let user of users$ | async" >{{user.name}}
+    <a [routerLink]="'/users/' + user.id" >Edit</a>
+  </li>
+</ul>
