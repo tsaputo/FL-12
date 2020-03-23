@@ -37,10 +37,8 @@ export class UserFormComponent implements OnInit {
         tap(user => this.userForm.patchValue(user))
       )
     } else {
-      this.user$ = new Subject();
-      (<Subject<User>>this.user$).next({id:1, name:"", email:"", phone: ""});
+      this.user$ = new Observable<User>((observer) => observer.next({id: -1, name:"", email:"", phone: ""}));
     }
-
   }
 
   saveUser() {

@@ -22,7 +22,12 @@ export class UserService {
     }
     
     saveUser(user) {
-        return this.http.put(`http://localhost:3000/users/${user.id}`, user)
+        if (user.id === 'new') {
+            user.id =  Math.floor(Math.random()*1000);
+            return this.http.post(`http://localhost:3000/users`, user)
+        } else {
+            return this.http.put(`http://localhost:3000/users/${user.id}`, user)
+        }
 
     }
 
