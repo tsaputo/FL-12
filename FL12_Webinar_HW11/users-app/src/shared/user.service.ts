@@ -22,7 +22,11 @@ export class UserService {
     }
     
     saveUser(user) {
-        this.http.put(`http://localhost:3000/users/${user.id}`, user)
-        alert('User Saved!')
+        return this.http.put(`http://localhost:3000/users/${user.id}`, user)
+
+    }
+
+    deleteUser(id) {
+        return this.http.delete(`http://localhost:3000/users/${id}`)
     }
 }

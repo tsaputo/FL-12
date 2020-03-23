@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { UserService, User } from '../../shared/user.service'
-import { ActivatedRoute } from '@angular/router'
-import { Observable } from 'rxjs'
+import { ActivatedRoute, Router } from '@angular/router'
+import { Observable, Subject } from 'rxjs'
 import { tap } from 'rxjs/operators';
 
 @Component({
@@ -15,7 +15,8 @@ export class UserFormComponent implements OnInit {
   constructor(
     private userService :UserService,
     private activatedRoute :ActivatedRoute,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private router: Router
     ) {
       this.userForm = formBuilder.group({
         name: ['', Validators.required],
@@ -31,9 +32,15 @@ export class UserFormComponent implements OnInit {
 
   ngOnInit(): void {
     const id = this.activatedRoute.snapshot.params.id;
-    this.user$ = this.userService.getUser(id).pipe(
-      tap(user => this.userForm.patchValue(user))
-    )
+    if (id !=='new') {
+      this.user$ = this.userService.getUser(id).pipe(
+        tap(user => this.userForm.patchValue(user))
+      )
+    } else {
+      this.user$ = new Subject();
+      (<Subject<User>>this.user$).next({id:1, name:"", email:"", phone: ""});
+    }
+
   }
 
   saveUser() {
@@ -44,7 +51,9 @@ export class UserFormComponent implements OnInit {
       phone: this.userForm.value.phone,
     };
 
-    this.userService.saveUser(user);
+    this.userService.saveUser(user).subscribe(()=> this.router.navigate(['/users']))
+    //subscribe on save
+
   }
 
 }
