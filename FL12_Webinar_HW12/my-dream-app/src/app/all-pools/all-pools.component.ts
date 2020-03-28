@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EmployeeService } from '../shared/employee.service'
 
 @Component({
   selector: 'app-all-pools',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AllPoolsComponent implements OnInit {
 
-  constructor() { }
+  constructor(public employeeService: EmployeeService) { }
 
   ngOnInit() {
+    
   }
 
 }

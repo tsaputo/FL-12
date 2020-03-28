@@ -1,12 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Route } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http'
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AllEmployeesComponent } from './all-employees/all-employees.component';
 import { AllPoolsComponent } from './all-pools/all-pools.component';
 import { WarningEmployeesComponent } from './warning-employees/warning-employees.component';
+import { EmployeeService } from './shared/employee.service';
 
 const routes: Route[] = [
   {
@@ -37,10 +38,10 @@ const routes: Route[] = [
    ],
    imports: [
       BrowserModule,
-      AppRoutingModule,
-      RouterModule.forRoot(routes)
+      RouterModule.forRoot(routes),
+      HttpClientModule
    ],
-   providers: [],
+   providers: [ EmployeeService ],
    bootstrap: [
       AppComponent
    ]
