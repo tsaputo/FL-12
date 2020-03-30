@@ -1,3 +1,5 @@
-<p>
-  warning-employees works!
-</p>
+<ul>
+  <li *ngFor="let employee of team">
+      {{employee.getName()}} ({{employee.getPerformance()}})
+  </li>
+</ul>

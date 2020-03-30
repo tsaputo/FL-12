@@ -22,11 +22,19 @@ export abstract class Employee {
     removeSubordinate(employee :Employee) :void {}
     getSubordinatesCount() :number {
         return 0;
-     }
+    }
+    getSubordinates() {
+        return [];
+    }
 
     isManager() :boolean { 
         return false; 
     }
+
+    getName() {}
+    abstract getPerformance() :string;
+    
+    getSalary() {}
 }
 
 export class Developer extends Employee {
@@ -46,6 +54,18 @@ export class Developer extends Employee {
         this.rm_id = rm_id;
         this.pool_name = pool_name;
     }
+
+    getName(): string {
+        return this.name;
+    }
+
+    getPerformance(): string {
+        return this.performance;
+    }
+
+    getSalary(): number {
+        return this.salary;
+    }
 }
 
 export class Manager extends Developer {
@@ -60,6 +80,10 @@ export class Manager extends Developer {
         const index = this.subordinates.indexOf(employee);
         this.subordinates.splice(index, 1);
         employee.setManager(null);
+    }
+
+    getSubordinates(): Array<Employee> {
+        return this.subordinates;
     }
 
     getSubordinatesCount() {
