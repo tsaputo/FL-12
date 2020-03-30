@@ -9,7 +9,7 @@
   <li *ngIf="employee.isManager()">
     <ul>
       {{employee.pool_name }} -
-      {{employee.getSubordinatesCount()}}
+      {{employee.getSubordinatesCount()+1}}
       <ng-container *ngTemplateOutlet="recursiveListTmpl; 
         context:{ $implicit: employee.subordinates }">
       </ng-container>

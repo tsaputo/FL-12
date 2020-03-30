@@ -17,7 +17,6 @@ export class AllPoolsComponent implements OnInit {
     this.employeeService.getEmployees().subscribe(
       (data) => {
         this.topManager = data;
-      }
-    )    
+      })    
   }
 }

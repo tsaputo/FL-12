@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { EmployeeService } from '../shared/employee.service'
+import { Employee } from '../shared/model';
 
 @Component({
   selector: 'app-warning-employees',
@@ -6,10 +8,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./warning-employees.component.css']
 })
 export class WarningEmployeesComponent implements OnInit {
+  topManager: Array<Employee>;
 
-  constructor() { }
+  constructor(public employeeService: EmployeeService) { }
 
   ngOnInit() {
+    this.employeeService.getEmployees().subscribe(
+      (data) => {
+        this.topManager = data;
+      })
   }
 
 }
