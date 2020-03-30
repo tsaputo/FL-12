@@ -35,14 +35,16 @@ export class Developer extends Employee {
     private performance: string;
     private salary: number;
     private rm_id: number;
+    private pool_name: string;
 
-    constructor({id, name, performance, salary, rm_id}) {
+    constructor({id, name, performance, salary, rm_id, pool_name}) {
         super();
         this.id = id;
         this.name = name;
         this.performance = performance;
         this.salary = salary;
         this.rm_id = rm_id;
+        this.pool_name = pool_name;
     }
 }
 

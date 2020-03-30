@@ -1,3 +1,21 @@
-<p>
-  all-pools works!
-</p>
+<ul>
+  <ng-container *ngTemplateOutlet="recursiveListTmpl; 
+    context:{ $implicit: topManager }">
+  </ng-container>
+</ul>
+
+<ng-template #recursiveListTmpl let-list>
+  <div *ngFor="let employee of list">
+  <li *ngIf="employee.isManager()">
+    <ul>
+      {{employee.pool_name }} -
+      {{employee.getSubordinatesCount()}}
+      <ng-container *ngTemplateOutlet="recursiveListTmpl; 
+        context:{ $implicit: employee.subordinates }">
+      </ng-container>
+    </ul>
+  </li>
+  </div>
+</ng-template>
+
+
