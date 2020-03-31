@@ -3,12 +3,18 @@
 // import * as notifier from './notifier';
 // import button from './button.html';
 import './styles.css';
+import Card from './Card';
 
-[...document.getElementsByClassName('item')].forEach(element => {
-  element.addEventListener('click',
-  () => alert("You have clicked me!")
-)
-});
+// [...document.getElementsByClassName('item')].forEach(element => {
+//   element.addEventListener('click',
+//   () => alert("You have clicked me!")
+// )
+// });
+
+for (let i = 1; i <= 9; i++) {
+  let card = new Card(`card_${i}`);
+  card.alertMethod();
+}
 
 
 // document.getElementById('error-btn').addEventListener('click',
