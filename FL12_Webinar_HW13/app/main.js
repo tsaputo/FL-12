@@ -4,6 +4,8 @@
 // import button from './button.html';
 import './styles.css';
 import Card from './Card';
+import emptyCells from './emptyCells';
+import checkWin from './checkWin';
 
 // [...document.getElementsByClassName('item')].forEach(element => {
 //   element.addEventListener('click',
@@ -11,10 +13,17 @@ import Card from './Card';
 // )
 // });
 
+
+
 for (let i = 1; i <= 9; i++) {
   let card = new Card(`card_${i}`);
-  card.alertMethod();
+  emptyCells();
+  card.chooseCard(1);
+
 }
+
+
+
 
 
 // document.getElementById('error-btn').addEventListener('click',
