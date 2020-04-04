@@ -1,7 +1,7 @@
 {
   "name": "es6",
   "version": "1.0.0",
-  "description": "ES6 modules example",
+  "description": "HW_6",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

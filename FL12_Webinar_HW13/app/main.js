@@ -1,30 +1,11 @@
-// import messages from './messages';
-// import defaultExport, { logError, warning, showSuccessMessage } from './notifier';
-// import * as notifier from './notifier';
-// import button from './button.html';
 import './styles.css';
-import Card from './Card';
-import emptyCells from './emptyCells';
-import checkWin from './checkWin';
+import renderCards from './renderCards'
 
-// [...document.getElementsByClassName('item')].forEach(element => {
-//   element.addEventListener('click',
-//   () => alert("You have clicked me!")
+renderCards();
+
+// document.getElementById('table').addEventListener('click',
+//   () => import('./renderCards')
 // )
-// });
-
-
-
-for (let i = 1; i <= 9; i++) {
-  let card = new Card(`card_${i}`);
-  emptyCells();
-  card.chooseCard(1);
-
-}
-
-
-
-
 
 // document.getElementById('error-btn').addEventListener('click',
 //   () => logError(messages.UNEXPECTED_ERROR)

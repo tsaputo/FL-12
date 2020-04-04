@@ -1,18 +1,25 @@
+import Card from "./Card";
 export default class Player {
-    constructor(name, cardType, isTurn) {
+    constructor(name, cardType) {
         this.name = name;
         this.cardType = cardType;
-        this.isTurn = isTurn;
-
+        this.wins = 0;
     }
-    wins = 0;
 
     emptyWins() {
         this.wins = 0;
     }
 
+    getCardType() {
+        return this.cardType;
+    }
+
     addWins() {
         this.wins++;
+    }
+    
+    chooseCard () {
+        toggleCard(this.cardType);
     }
 
 }
