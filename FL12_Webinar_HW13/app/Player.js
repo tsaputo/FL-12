@@ -6,6 +6,10 @@ export default class Player {
         this.wins = 0;
     }
 
+    getName() {
+        return this.name;
+    }
+
     emptyWins() {
         this.wins = 0;
     }

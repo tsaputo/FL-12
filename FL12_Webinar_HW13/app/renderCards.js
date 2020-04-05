@@ -3,7 +3,6 @@ import Card from './Card';
 import chooseType from './chooseType'
 import Player from './Player'
 import handleClick from './handleClick'
-import disableClicks from './disableClicks'
 
 export default function renderCards() {
     let myChoice =  chooseType();
@@ -16,14 +15,11 @@ export default function renderCards() {
         let card = new Card(`card_${i}`);
         allCards.push(card);
 
-        let listener = function() {            
+        let listener = function() {           
             handleClick(i, card, allCards, player, computer);
-            disableClicks(listener);
         }; 
 
-        document.getElementById(`card_${i}`).addEventListener(
-        "click", listener, false); 
-        
+        document.getElementById(`card_${i}`).addEventListener("click", listener);    
     }
     emptyCells();
 }
