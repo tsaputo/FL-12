@@ -11,6 +11,7 @@ describe('CreditCardService', () => {
   const INVALID_NUMBER_FORMAT = 'Credit card number is in invalid format'
   const INVALID_LENGTH = 'Credit card number has an inappropriate number of digits'
   const SCAM_ATTEMPT = 'Warning! This credit card number is associated with a scam attempt'
+  const SPAM_NUMBER = '5490997771092064';
 
 
   beforeEach(() => {
@@ -43,8 +44,24 @@ describe('CreditCardService', () => {
     })
   });
 
+  it('should retun error if prefix is not valid', () => {
+    expect(service.testCreditCard('6111 1111 1111 1111', 'Visa')).toEqual({
+      isValid: false,
+      message: INVALID_NUMBER
+    })
+  });
 
+  it('should retun scam warning', () => {
+    expect(service.testCreditCard(SPAM_NUMBER, 'MasterCard')).toEqual({
+      isValid: false,
+      message: SCAM_ATTEMPT
+    })
+  });
 
-
-
+  it('should retun error if length does not match the predefined one', () => {
+    expect(service.testCreditCard('4181 1101 1011 9 1111', 'Visa')).toEqual({
+      isValid: false,
+      message: INVALID_LENGTH
+    })
+  });
 });
